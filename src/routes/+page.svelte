@@ -49,7 +49,7 @@
   });
   let cachedRoutes = null;
   let line = "210";
-  let direction = "TP-TRU";
+  let direction = "TO-TRUH";
 
   async function getCachedOrFetchData(api, cachedData) {
     if (!cachedData) {
@@ -93,7 +93,14 @@
   }
   async function dupa() {
     let przystanki = await getCachedOrFetchData(apiRoutes, cachedRoutes);
+
     przystanki = przystanki.result[line][direction];
+    if (przystanki == undefined) {
+      console.error(
+        `%c Błąd w trasie. ${line} ${direction} `,
+        "color: red; font-weight: bold; font-size: 16px"
+      );
+    }
     const posortowanePrzystanki = Object.values(przystanki).sort(
       (a, b) => parseInt(a[0]) - parseInt(b[0])
     );
@@ -118,7 +125,7 @@
 
       return stopObjects.filter((item) => item !== null);
     } catch (error) {
-      console.error("fetchAllBusStopsData(): ", error);
+      console.log("fetchAllBusStopsData(): ", error);
     }
   }
   const stopObjectsPromise = fetchAllBusStopsData();

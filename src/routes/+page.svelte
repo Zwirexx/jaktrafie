@@ -49,7 +49,7 @@
   });
   let cachedRoutes = null;
   let line = "210";
-  let direction = "TO-TRUH";
+  let direction = "TP-TRUH";
 
   async function getCachedOrFetchData(api, cachedData) {
     if (!cachedData) {

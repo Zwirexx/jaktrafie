@@ -1,3 +1,5 @@
+# WORK IN PROGRESS
+
 # JakTrafie
 
 JakTrafie to innowacyjna aplikacja webowa, która ułatwia korzystanie z komunikacji miejskiej w Warszawie.

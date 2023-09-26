@@ -17,4 +17,6 @@ JakTrafie to innowacyjna aplikacja webowa, która ułatwia korzystanie z komunik
 Poniżej planowany wygląd finalnego produktu (w dalekiej przyszłości).
 
 ![App Screenshot 1](https://i.ibb.co/LQ0b04J/Desktop-1-1.jpg)
-
+.
+.
+.

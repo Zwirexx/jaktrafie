@@ -48,8 +48,8 @@
     cachedBusStops = value;
   });
   let cachedRoutes = null;
-  let line = "210";
-  let direction = "TP-TRUH";
+  let line = "326";
+  let direction = "TP-MMA";
 
   async function getCachedOrFetchData(api, cachedData) {
     if (!cachedData) {

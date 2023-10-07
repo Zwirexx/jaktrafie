@@ -2,6 +2,8 @@
   export let line;
   export let stopObjects;
 
+  let isMoving = false;
+
   /**
    * Funkcja dodaje spację po kropce w nazwie przystanku.
    *
@@ -31,13 +33,12 @@
       <div class="text-white font-bold text-6xl">{line}</div>
       <div class="ml-5">
         <div class="text-slate-400 font-medium text-lg">Kierunek</div>
-        <div class="overflow-hidden w-44 whitespace-nowrap">
-          <div
-            class=" text-white font-medium text-xl"
-            class:scrolling-text={stopObjects[stopObjects.length - 1].nazwa
-              .length > 15}
-          >
-            {checkDotInName(stopObjects[stopObjects.length - 1].nazwa)}
+        <div class="overflow-hidden w-52 whitespace-nowrap stop-wrapper">
+          <div class=" text-white font-medium text-xl">
+            <!-- Nazwa przystanku xd -->
+            <span
+              >{checkDotInName(stopObjects[stopObjects.length - 1].nazwa)}</span
+            >
           </div>
         </div>
       </div>
@@ -111,6 +112,10 @@
   }
   .stops-list {
     max-height: 70%;
+    margin-top: -5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    mask: linear-gradient(0deg, transparent, white 5%, white 95%, transparent);
   }
   .line {
     margin-left: 8px;
@@ -119,31 +124,21 @@
   }
   .scrolling-text {
     /* transform: translateX(0%); */
-
-    animation: scrollText 10s linear infinite;
+    padding-right: 100%;
+    animation-delay: 3s;
+    animation: scrollText 3s linear infinite;
+  }
+  .stop-wrapper {
+    mask: linear-gradient(90deg, transparent, white 5%, white 95%, transparent);
+    margin-left: -8px;
+    padding-left: 8px;
   }
   @keyframes scrollText {
-    from {
-      transform: translateX(100%);
+    0% {
+      transform: translate(0, 0);
     }
-    to {
-      transform: translateX(-200%);
+    100% {
+      transform: translate(-100%, 0);
     }
-  }
-  @keyframes magic-flow {
-    from {
-      background-position: 0% center;
-    }
-    to {
-      background-position: -200% center;
-    }
-  }
-  .glowing-text {
-    animation: magic-flow 4s linear infinite;
-    background: linear-gradient(60deg, #fde5b9, #bcd1db, #fde5b9);
-    background-size: 200%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
   }
 </style>

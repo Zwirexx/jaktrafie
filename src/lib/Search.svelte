@@ -23,6 +23,12 @@
   //   dataArray.push(`${element.values[2].value} ${element.values[1].value}`);
   //   // console.log(element.values);
   // });
+
+  // document.querySelector("#searchInput").addEventListener("input", () =>{
+  //   if(this.value.length > 0) {
+  //     this.
+  // })
+
   function checkDotInName(str) {
     const dotIndex = str.indexOf(".");
     if (
@@ -90,6 +96,7 @@
 
     if (map) {
       L.marker([lat, lng]).addTo(map);
+
       map.setView([lat, lng], 17);
       searchText = "";
     }
@@ -112,8 +119,10 @@
         bind:value={searchText}
         on:input={check}
         type="text"
-        class="mt-10 w-96 rounded-tl-lg"
+        id="searchInput"
+        class="mt-10 rounded-tl-lg"
         class:rounded-bl-lg={!searchInitiated}
+        class:typing={searchInitiated}
         placeholder="Wyszukaj przystanek lub adres"
       />
       <button
@@ -220,6 +229,11 @@
     font-size: 1rem;
     box-sizing: border-box;
     outline: none;
+    width: 20rem;
+    transition: all 0.2s ease-in-out;
+  }
+  input.typing {
+    width: 30rem;
   }
   input::placeholder {
     color: #888eb4;

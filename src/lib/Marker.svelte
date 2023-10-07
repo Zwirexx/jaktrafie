@@ -19,11 +19,8 @@
     if (map) {
       marker = L.marker(markerLatLng, {
         icon: L.icon({
-          iconUrl:
-            stopType == "2"
-              ? "src/assets/blank-stop-circle.svg"
-              : "src/assets/full-stop-circle.svg",
-          iconSize: [20, 20],
+          iconUrl: "src/assets/stop-circle.svg",
+          iconSize: [18, 18],
           // iconAnchor: [12, 24],
         }),
       }).addTo(map);

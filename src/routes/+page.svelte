@@ -17,8 +17,7 @@
     "Jesteś 2147483648 w kolejce...",
   ];
   let loadingMessageIndex = 0;
-  const apiStops =
-    "https://api.um.warszawa.pl/api/action/dbstore_get/?id=ab75c33d-3a26-4342-b36a-6e5fef0a3ac3&apikey=558910cd-f086-4a9f-a7d0-d7b4048a9e83";
+  const apiStops = "http://localhost:3000/api/stops";
 
   function displayNextMessage() {
     setTimeout(() => {
@@ -48,8 +47,8 @@
     cachedBusStops = value;
   });
   let cachedRoutes = null;
-  let line = "326";
-  let direction = "TP-MMA";
+  let line = "210";
+  let direction = "TX-MML03";
 
   async function getCachedOrFetchData(api, cachedData) {
     if (!cachedData) {
@@ -93,14 +92,7 @@
   }
   async function dupa() {
     let przystanki = await getCachedOrFetchData(apiRoutes, cachedRoutes);
-
     przystanki = przystanki.result[line][direction];
-    if (przystanki == undefined) {
-      console.error(
-        `%c Błąd w trasie. ${line} ${direction} `,
-        "color: red; font-weight: bold; font-size: 16px"
-      );
-    }
     const posortowanePrzystanki = Object.values(przystanki).sort(
       (a, b) => parseInt(a[0]) - parseInt(b[0])
     );
@@ -125,7 +117,7 @@
 
       return stopObjects.filter((item) => item !== null);
     } catch (error) {
-      console.log("fetchAllBusStopsData(): ", error);
+      console.error("fetchAllBusStopsData(): ", error);
     }
   }
   const stopObjectsPromise = fetchAllBusStopsData();

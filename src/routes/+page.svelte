@@ -3,6 +3,7 @@
   import Marker from "$lib/Marker.svelte";
   import { apiStopsStore } from "../lib/store.js";
   import { scale } from "svelte/transition";
+  import { fade } from "svelte/transition";
   import { quintOut } from "svelte/easing";
   import ChunkSpinner from "../lib/ChunkSpinner.svelte";
   import RoutePane from "../lib/RoutePane.svelte";
@@ -123,46 +124,71 @@
   const stopObjectsPromise = fetchAllBusStopsData();
 </script>
 
-{#await stopObjectsPromise}
-  <section class="h-screen w-full flex justify-center items-center flex-col">
-    <div>
-      <div class="text-xl mb-3 font-medium">{loadingMessage}</div>
-      <ChunkSpinner />
-    </div>
-  </section>
-{:then stopObjects}
-  <section>
-    <RoutePane {line} {stopObjects} />
-  </section>
-
-  <section
-    transition:scale={{
-      duration: 500,
-      opacity: 0.2,
-      start: 0.5,
-      easing: quintOut,
-    }}
-    class="map h-screen w-screen absolute inset-y-0 right-0"
-  >
-    <Leaflet {initialView} zoomLevel={12}>
-      {#each stopObjects as stop}
-        <Marker
-          markerLatLng={[stop.szerokosc, stop.dlugosc]}
-          number={stopObjects.indexOf(stop) + 1}
-          stopType={stop.typ}
+<main>
+  {#await stopObjectsPromise}
+    <section class="h-screen w-full flex justify-center items-center flex-col">
+      <div class="w-1/3">
+        <!-- <div class="text-xl mb-3 font-medium">{loadingMessage}</div>
+        <ChunkSpinner /> -->
+        <img
+          src="src/assets/jaktrafiebanner.png"
+          id="loading-img"
+          alt="Ładowanie"
+          out:scale={{
+            duration: 200,
+            opacity: 0.1,
+            start: 0.5,
+            easing: quintOut,
+          }}
         />
-      {/each}
-      <Search slot="search" />
-    </Leaflet>
-  </section>
-{:catch error}
-  <div class="h-screen w-full flex justify-center items-center">
-    <div>{error}</div>
-  </div>
-{/await}
+      </div>
+    </section>
+  {:then stopObjects}
+    <section in:fade={{ duration: 200 }}>
+      <RoutePane {line} {stopObjects} />
+    </section>
+
+    <section
+      class="map h-screen w-screen absolute inset-y-0 right-0"
+      in:fade={{ duration: 200 }}
+    >
+      <Leaflet {initialView} zoomLevel={12}>
+        {#each stopObjects as stop}
+          <Marker
+            markerLatLng={[stop.szerokosc, stop.dlugosc]}
+            number={stopObjects.indexOf(stop) + 1}
+            stopType={stop.typ}
+          />
+        {/each}
+        <Search slot="search" />
+      </Leaflet>
+    </section>
+  {:catch error}
+    <div class="h-screen w-full flex justify-center items-center">
+      <div>{error}</div>
+    </div>
+  {/await}
+</main>
 
 <style lang="postcss">
   section.map {
     width: 73%;
+  }
+  main {
+    background-color: #1b0029;
+  }
+  #loading-img {
+    animation: pulse 1.5s linear infinite;
+  }
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 </style>

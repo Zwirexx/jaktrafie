@@ -1,3 +1,5 @@
+![](src/assets/jaktrafiebanner.png)
+
 # JakTrafie
 
 JakTrafie is a web application that makes it easier to use public transportation in Warsaw.
@@ -34,7 +36,6 @@ Start the server
 ```bash
   npm start
 ```
-
 
 ## Environment Variables
 

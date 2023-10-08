@@ -104,10 +104,8 @@
   function check() {
     if (searchText.length == 0) {
       searchInitiated = false;
-      console.log("dupa");
     } else {
       searchInitiated = true;
-      console.log("dupa");
     }
   }
 </script>

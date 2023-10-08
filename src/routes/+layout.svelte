@@ -4,8 +4,7 @@
   import { apiStopsStore } from "../lib/store.js";
   import { apiDictionaryStore } from "../lib/store.js";
   import { apiStopLinesStore } from "../lib/store.js";
-  const apiStopsUrl =
-    "https://api.um.warszawa.pl/api/action/dbstore_get/?id=ab75c33d-3a26-4342-b36a-6e5fef0a3ac3&apikey=558910cd-f086-4a9f-a7d0-d7b4048a9e83";
+  const apiStopsUrl = "http://localhost:3000/api/stops";
   const apiDictionaryUrl = "http://localhost:3000/api/dictionary";
   async function getStops() {
     const response = await fetch(apiStopsUrl);
